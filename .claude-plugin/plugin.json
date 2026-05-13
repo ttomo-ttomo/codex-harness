@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "codex-harness",
+  "version": "0.1.0",
+  "description": "3-stage Codex x Claude Code harness with guardrail engine, subagents (architect/critic/triage), and /fix /task /feature commands.",
+  "author": {
+    "name": "ttomo-ttomo",
+    "url": "https://github.com/ttomo-ttomo"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ttomo-ttomo/codex-harness",
+  "repository": "https://github.com/ttomo-ttomo/codex-harness",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "harness",
+    "guardrails",
+    "subagents",
+    "mcp"
+  ]
+}
