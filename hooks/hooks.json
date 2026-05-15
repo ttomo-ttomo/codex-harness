@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
     "PreToolUse": [
       {
@@ -7,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 core/hooks.py pre"
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/core/hooks.py\" pre"
           }
         ]
       }
@@ -18,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 core/hooks.py post"
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/core/hooks.py\" post"
           }
         ]
       }
@@ -28,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 core/hooks.py stop"
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/core/hooks.py\" stop"
           }
         ]
       }

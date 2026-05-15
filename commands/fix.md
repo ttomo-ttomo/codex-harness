@@ -24,7 +24,7 @@ argument-hint: <修正内容の短い説明>
    - 3 回で解決しなければ `/task` へエスカレーション
 
 4. **Codex 軽レビュー**
-   - `.claude/skills/codex-review/SKILL.md` の手順に従い、`codex exec` で差分レビューを実行
+   - `codex-review` スキル（`${CLAUDE_PLUGIN_ROOT}/skills/codex-review/SKILL.md`）の手順に従い、`codex exec` で差分レビューを実行
    - 多ターン対話は行わない（一発レビューのみ）
 
 5. **triage**

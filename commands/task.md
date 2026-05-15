@@ -14,7 +14,7 @@ argument-hint: <タスクの説明>
 1. **task-id を採番**: `YYYYMMDD-<短い要約>` 形式
 2. **作業ディレクトリ作成**: `.claude/work/<task-id>/`
 3. **task-note.md を起草**
-   - `.claude/templates/task-note.md` をコピー
+   - `${CLAUDE_PLUGIN_ROOT}/templates/task-note.md` をコピー
    - 背景・スコープ・完了条件・影響範囲・ロールバック手順を埋める
    - 関連する ADR を `docs/adr/` から検索して参照
 4. **ユーザー承認を取る**
