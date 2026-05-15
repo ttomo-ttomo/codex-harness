@@ -93,6 +93,18 @@
 - スタイルの揚げ足取りより、**設計・セキュリティ・パフォーマンス**を優先
 - 差分が大きいときは、重要な 5 点に絞って指摘
 
+### Codex 不在時のフォールバック
+
+- 設定は環境変数 `CODEX_HARNESS_FALLBACK` で行う。許容値は `auto` / `off` / `claude-subagent`、デフォルトは `auto`
+- `auto`: Codex を検出できれば通常経路、検出できなければフォールバック
+- `claude-subagent`: Codex の有無に関わらずレビュー系経路を強制フォールバック
+- `off`: フォールバックせず、Codex 不在時は停止
+- 採用案 D により、`/fix` と `/task` は `agents/codex-fallback-reviewer.md` に委譲する
+- 採用案 D により、`/feature` は実装委譲をフォールバックさせず停止し、ユーザーに「自分で実装する / Codex を入れる / `/task` に降格する」の 3 択を提示する
+- フォールバック発動マーカーは `[harness-core] FALLBACK MODE: Codex unavailable (<reason>). Strategy: <strategy>. Quality may degrade.` とする
+- この書式の唯一の生成箇所は `core/codex_detect.py` の `format_fallback_marker()` であり、呼び出し側で独自生成しない
+- 詳細な決定理由と運用方針は `docs/adr/0001-codex-fallback-strategy.md` を参照
+
 ## Claude Code 固有の指示
 
 - サブエージェント（architect, triage）を積極的に活用

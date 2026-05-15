@@ -54,7 +54,21 @@ _（なし）_
 - **学び**: <次回に活かせるメモ>
 -->
 
-_（なし）_
+### 2026-05-15: Codex 未インストール時のフォールバック
+- **ID**: 20260515-codex-fallback
+- **段階**: 3 (/feature)
+- **成果物**: コミット予定（PR は別途）
+- **アーティファクト**: `.claude/work/20260515-codex-fallback/`（REQUIREMENTS.md / TEST.md / AGENT_TASKS.md）
+- **ADR**: `docs/adr/0001-codex-fallback-strategy.md`（accepted）
+- **採用方針**: 論点 2=D（ハイブリッド）+ 論点 7=(b)（skill / コマンド内 `python3` 直接呼び出し）
+  - `/fix`・`/task` → `agents/codex-fallback-reviewer.md` に委譲
+  - `/feature` → 実装委譲は停止、ユーザーに 3 択提示
+- **新規ファイル**: `core/codex_detect.py` / `core/test_codex_detect.py` / `agents/codex-fallback-reviewer.md` / `docs/adr/0001-...`
+- **テスト**: 単体 16 件追加（既存 13 件と合わせて 29 件 pass、退行なし）
+- **学び**:
+  - architect → critic を 2 サイクル回したことで「採用案未確定のまま T3-T6 に進む矛盾」「ADR proposed 中の決定凍結問題」が事前に解消できた
+  - 副次的決定（先行確定）と運用メモ（accepted 化時に削除）のパターンは ADR のロックイン回避に有効
+  - 検出ヘルパーの呼び出し主体（hook / skill 直書き / CLI）を独立論点として critic が指摘してくれたおかげで、後続タスクの曖昧さが消えた
 
 ## メトリクス
 

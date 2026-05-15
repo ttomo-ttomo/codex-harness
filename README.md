@@ -45,6 +45,10 @@ Claude Code プラグイン（marketplace）として配布する。
 4. プラグインを有効化したいプロジェクトの `AGENTS.md` をプロジェクト用に編集（テンプレが必要なら `templates/` を参照）
 5. 動作確認：`/fix` / `/task` / `/feature` が補完候補に出るか
 
+## Codex 不在時のフォールバック
+
+Codex CLI が PATH に無い環境でも、採用案 D により `/fix` と `/task` は `agents/codex-fallback-reviewer.md` へ縮退できる一方、`/feature` の実装委譲は品質劣化リスクを避けるため停止する。設定は `export CODEX_HARNESS_FALLBACK=auto` のように行い、`auto` では利用可能なら Codex を使い、不在ならフォールバックする。`off` は Codex 不在時に停止、`claude-subagent` はレビュー系経路を強制フォールバックする。発動時のマーカーは `[harness-core] FALLBACK MODE: Codex unavailable (<reason>). Strategy: <strategy>. Quality may degrade.` で、`core/codex_detect.py` の `format_fallback_marker()` が唯一の生成箇所である。詳細は `docs/adr/0001-codex-fallback-strategy.md` を参照。
+
 ## 設計思想
 
 - **AGENTS.md = エージェント向け ADR の軽量版**。両ツールが同じ憲法を読む

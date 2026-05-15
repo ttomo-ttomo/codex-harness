@@ -26,7 +26,7 @@ argument-hint: <機能の説明>
 ### Phase 1.5: Critic レビュー（承認ゲート前の自己批評）
 
 1. **critic サブエージェントを起動**
-   - 入力: architect が出した全成果物（REQUIREMENTS.md / TEST.md / AGENT_TASKS.md / ADR ドラフト）
+   - 入力: architect が出した全成果物（REQUIREMENTS.md / TEST.md / AGENT_TASKS.md / ADR ドラフト）+ フォールバック発動の有無や `CODEX_HARNESS_FALLBACK` 設定など、Codex 利用可否の前提
    - 出力: Must / Should / Could の 3 分類で批評
 2. **critic の判定別の対応**
    - **承認推奨**: Phase 2 へ
@@ -46,6 +46,30 @@ argument-hint: <機能の説明>
 4. 修正指示があれば architect を再度呼び出して更新
 
 ### Phase 3: タスク委譲ループ
+
+#### Phase 3 着手前: Codex 検出（必須）
+
+```bash
+python3 -c "
+from core.codex_detect import detect_codex, should_fallback
+
+detection = detect_codex()
+fallback, strategy = should_fallback()
+
+if not detection.available:
+    print('STOP')
+else:
+    print('OK')
+"
+```
+
+- `OK` の場合は通常どおり `mcp__codex__implement` を使ってタスク委譲ループに進む
+- `STOP` の場合は採用案 D により実装委譲を停止し、ユーザーに以下 3 択を提示して止まる
+  1. **自分で実装する**: CC が手を動かす形に切り替える
+  2. **Codex を入れる**: `codex` CLI をインストールして `/feature` を再実行する
+  3. **`/task` に降格する**: 実装委譲は諦め、軽量レビュー中心のフローに切り替える
+- `CODEX_HARNESS_FALLBACK=off` の場合も `/feature` では同様に停止する。メッセージだけ「フォールバック無効のため停止」と明示する
+- `agents/codex-fallback-reviewer.md` は `/feature` Phase 3 では使わない。reviewer 専用であり、implement 用には作成しない
 
 `AGENT_TASKS.md` の各タスクについて、順次以下を実行：
 
@@ -88,3 +112,5 @@ argument-hint: <機能の説明>
 - Codex が 2 回差し戻しても改善しない
 - テストが落ち続ける（3 回以上）
 - 事前に想定していない破壊的変更が必要になった
+- Codex 不在で `/feature` の実装委譲が停止された（採用案 D）
+- `CODEX_HARNESS_FALLBACK=off` でフォールバック自体が無効化されている
