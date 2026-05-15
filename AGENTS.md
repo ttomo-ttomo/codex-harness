@@ -97,10 +97,10 @@
 
 - サブエージェント（architect, triage）を積極的に活用
 - 計画フェーズでユーザー承認を必ず取る（段階 3）
-- skill は `.claude/skills/` 配下から自動ロード
+- skill は `skills/` 配下から自動ロード（プラグイン install 時）
 
 ## 参照リンク
 
 - Codex MCP: `.mcp.json` 参照
-- サブエージェント定義: `.claude/agents/`
-- テンプレート: `.claude/templates/`
+- サブエージェント定義: `agents/`
+- テンプレート: `templates/`

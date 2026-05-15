@@ -44,7 +44,7 @@ hooks.py (CLI)
 ## セットアップ
 
 ビルド不要。`python3 >= 3.10` が PATH に通っていればそのまま動く。
-フック登録はリポジトリルートの `.claude/settings.json` に済んでいる。
+フック登録はプラグイン直下の `hooks/hooks.json` に済んでいる（`${CLAUDE_PLUGIN_ROOT}/core/hooks.py` を呼び出す）。
 
 ## テスト
 
