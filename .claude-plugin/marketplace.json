@@ -1,0 +1,16 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "codex-harness",
+  "owner": {
+    "name": "ttomo-ttomo",
+    "email": "aoen210@icloud.com"
+  },
+  "description": "3-stage Codex x Claude Code harness marketplace",
+  "plugins": [
+    {
+      "name": "codex-harness",
+      "source": "./",
+      "description": "3-stage Codex x Claude Code harness with guardrail engine, subagents (architect/critic/triage), and /fix /task /feature commands."
+    }
+  ]
+}

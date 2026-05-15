@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "codex-harness",
   "version": "0.1.0",
   "description": "3-stage Codex x Claude Code harness with guardrail engine, subagents (architect/critic/triage), and /fix /task /feature commands.",
